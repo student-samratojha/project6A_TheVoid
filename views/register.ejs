@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Void | Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #0f172a; color: #e2e8f0; min-height: 100vh; overflow: hidden; }
+        .rain { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        .drop { position: absolute; background: rgba(255, 255, 255, 0.1); width: 1px; height: 80px; animation: fall 1s linear infinite; }
+        @keyframes fall { to { transform: translateY(100vh); } }
+        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
+</head>
+<body class="flex items-center justify-center">
+    <div class="rain"></div>
+    
+    <div class="glass p-8 rounded-2xl shadow-2xl w-full max-w-md z-10 mx-4">
+        <h1 class="text-3xl font-bold mb-6 text-center tracking-tight">Initialize Identity</h1>
+        <form action="/auth/register" method="POST" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium mb-1 opacity-70">Name</label>
+                <input type="text" name="name" required class="w-full bg-slate-800/50 border border-white/10 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1 opacity-70">Email</label>
+                <input type="email" name="email" required class="w-full bg-slate-800/50 border border-white/10 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-1 opacity-70">Password</label>
+                <input type="password" name="password" required class="w-full bg-slate-800/50 border border-white/10 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+            </div>
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 transition-colors text-white font-semibold py-2 rounded-lg mt-4">
+                Register
+            </button>
+        </form>
+        <p class="mt-6 text-center text-sm opacity-60">
+            Already have an account? <a href="/auth/login" class="text-blue-400 hover:underline">Login</a> | <a href="/"class="text-blue-400 hover:underline">Home</a>
+        </p>
+    </div>
+
+    <script>
+        const rain = document.querySelector('.rain');
+        for (let i = 0; i < 60; i++) {
+            const drop = document.createElement('div');
+            drop.classList.add('drop');
+            drop.style.left = Math.random() * 100 + 'vw';
+            drop.style.animationDuration = Math.random() * 0.5 + 0.7 + 's';
+            drop.style.animationDelay = Math.random() * 2 + 's';
+            rain.appendChild(drop);
+        }
+    </script>
+</body>
+</html>
